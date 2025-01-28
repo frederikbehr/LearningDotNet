@@ -3,8 +3,8 @@ namespace BusCompany;
 public class BusCompanyManager
 {
     private const double InitialFee = 2500;
-    private double Distance = 0;
-    private static double[][] Pricing = [
+    private double _distance = 0;
+    private static readonly double[][] Pricing = [
         [100, 10], 
         [500, 8], 
         [Double.PositiveInfinity, 6],
@@ -17,13 +17,13 @@ public class BusCompanyManager
         //Run through pricing minus last one, and find a match
         for (int i = 0; i < Pricing.Length - 1; i++)
         {
-            if (Distance < Pricing[i][0]) return Pricing[i][1] * Distance + InitialFee;
+            if (_distance < Pricing[i][0]) return Pricing[i][1] * _distance + InitialFee;
         }
         //Reaching here means it must be the last one.
         //This makes it safe and adjustable.
-        return Pricing.Last()[1] * Distance + InitialFee;
+        return Pricing.Last()[1] * _distance + InitialFee;
     }
 
-    public void SetDistance(double distance) => Distance = distance;
+    public void SetDistance(double distance) => _distance = distance;
     
 }
